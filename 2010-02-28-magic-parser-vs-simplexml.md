@@ -10,38 +10,38 @@ performance with this particular task.
 
 When I'm parsing through XML code I really want a tree-like structure. Magic
 Parser returns everything in a flat array, with tag names separated by
-slashes. For example:  
-`  
-  
- A  
-  
+slashes. For example:
+`
+<foo>
+    <bar>A</bar>
+<foo>
 `
 
-would return  
-`  
-Array([FOO]=>"", [FOO/BAR]=>"A")  
+would return
+`
+Array([FOO]=>"", [FOO/BAR]=>"A")
 `
 
 This causes problems if there is more than one tag with the same name. For
-example:  
-`  
-  
- A  
- B  
-  
+example:
+`
+<foo>
+    <bar>A</bar>
+    <bar>B</bar>
+<foo>
 `
 
-They work around this by sending three arrays to the callback function:  
-`  
-Array([BAR]=>"A")  
-Array([BAR]=>"B")  
-Array([FOO]=>"", [FOO/BAR]=>"A")  
+They work around this by sending three arrays to the callback function:
+`
+Array([BAR]=>"A")
+Array([BAR]=>"B")
+Array([FOO]=>"", [FOO/BAR]=>"A")
 `
 
 This actually makes it harder to process the XML than if I were using
-SimpleXML, as SimpleXML would return:  
-`  
-SimpleXML Object([bar]=>Array([0]=>"A", [1]=>"B"))  
+SimpleXML, as SimpleXML would return:
+`
+SimpleXML Object([bar]=>Array([0]=>"A", [1]=>"B"))
 `
 
 In SimpleXML I would just have to cycle through the array attached to the
